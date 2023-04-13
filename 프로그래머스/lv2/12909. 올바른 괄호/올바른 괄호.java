@@ -1,28 +1,25 @@
-import java.util.*;
-
 class Solution {
     boolean solution(String s) {
         boolean answer = true;
+        int count = 0;
+        String[] str = s.split("");
         
-        Stack<Character> Stack = new Stack<>();
-        
-        for (int i=0; i<s.length(); i++) {
-            char c = s.charAt(i);
-            if (c == '(') {
-                Stack.push(c);
-            } else if (c == ')') {
-                if (Stack.size() == 0) {
+        if (str[0].equals("(")) {
+            for (int i=0; i<str.length; i++) {
+                if (count < 0) {
                     return answer = false;
-                } else {
-                    Stack.pop();
+                } else if (str[i].equals(")")) {
+                    count -= 1;
+                } else if (str[i].equals("(")) {
+                    count += 1;
                 }
+            } 
+            if (count != 0) {
+                return answer = false;
             }
-        }
-        if (Stack.size() != 0) {
+        } else {
             answer = false;
         }
-        
-        
         
 
         return answer;
